@@ -37,8 +37,7 @@ public class EmployeeServiceTest {
 		Float tax = (employee.getTaxPercentage() * employee.getGrossSalary()) / 100;
 		Float pension = (employee.getPensionPercentage() * employee.getGrossSalary()) / 100;
 		Float netSalary = employee.getGrossSalary() - tax - pension + employee.getAdditionalBenefitAmount();
-        System.out.println("asddasas" + employeeRepository);
-		when(employeeRepository.findAll()).thenReturn(Arrays.asList(employee));
+     	when(employeeRepository.findAll()).thenReturn(List.of(employee));
 		List<EmployeeResponseDto> result = employeeService.getEmployees();
 		assertEquals(1, result.size());
 		assertEquals(netSalary, (Float) result.get(0).getNetSalary());
@@ -52,16 +51,16 @@ public class EmployeeServiceTest {
 		Float tax = (employee.getTaxPercentage() * employee.getGrossSalary()) / 100;
 		Float pension = (employee.getPensionPercentage() * employee.getGrossSalary()) / 100;
 		Float netSalary = employee.getGrossSalary() - tax - pension;
-		when(employeeRepository.findAll()).thenReturn(Arrays.asList(employee));
+		when(employeeRepository.findAll()).thenReturn(List.of(employee));
 		List<EmployeeResponseDto> result = employeeService.getEmployees();
 		assertEquals(1, result.size());
-		assertEquals(netSalary, (Float) result.get(0).getNetSalary());
+		assertEquals(netSalary,  result.get(0).getNetSalary());
 
 	}
 
 	@Test
 	public void testGetEmployeesReturnsNoRecords() {
-		when(employeeRepository.findAll()).thenReturn(new ArrayList<Employee>());
+		when(employeeRepository.findAll()).thenReturn(new ArrayList<>());
 		List<EmployeeResponseDto> result = employeeService.getEmployees();
 		assertEquals(0, result.size());
 	}
