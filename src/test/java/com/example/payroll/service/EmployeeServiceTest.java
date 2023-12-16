@@ -6,7 +6,6 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
@@ -40,7 +39,7 @@ public class EmployeeServiceTest {
      	when(employeeRepository.findAll()).thenReturn(List.of(employee));
 		List<EmployeeResponseDto> result = employeeService.getEmployees();
 		assertEquals(1, result.size());
-		assertEquals(netSalary, (Float) result.get(0).getNetSalary());
+		assertEquals(netSalary, result.get(0).getNetSalary());
 
 	}
 
