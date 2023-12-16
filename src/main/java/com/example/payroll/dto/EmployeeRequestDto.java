@@ -1,5 +1,6 @@
 package com.example.payroll.dto;
 
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 
 public class EmployeeRequestDto {
@@ -14,14 +15,18 @@ public class EmployeeRequestDto {
 	private String projectName;
 
 	@NotNull(message = "grossSalary is mandatory")
+	@Min(value = 0L, message = "The grossSalary must be positive")
 	private Float grossSalary;
 
 	@NotNull(message = "taxPercentage is mandatory")
+	@Min(value = 0L, message = "The taxPercentage must be positive")
 	private Float taxPercentage;
 
 	@NotNull(message = "pensionPercentage is mandatory")
+	@Min(value = 0L, message = "The pensionPercentage must be positive")
 	private Float pensionPercentage;
 
+	@Min(value = 0L, message = "The additionalBenefitAmount must be positive")
 	private Float additionalBenefitAmount;
 
 	public String getName() {
