@@ -1,7 +1,7 @@
 # Employee Payroll Management System
-This project is a simple Employee Payroll Management System developed using Gradle, Spring Boot, and Java. 
+This project is Employee Payroll Management System developed using `Gradle`, `Spring Boot`, `Java` and `Hibernate`. 
 It exposes two APIs for managing employee data and provides health check capabilities using Actuator. 
-The system utilizes an H2 database for persistence.
+The system utilizes an `H2 database` for persistence. Application is starting at default port of `8080`.
 
 ### Setup and Run
 1. Clone the repository.
@@ -12,73 +12,94 @@ The system utilizes an H2 database for persistence.
 4. JacocoTest Report
    gradlew clean test jacocoTestReport
 
+### Postman Collection
+postman collection can be found in postman folder under resources folder.
+
 ## API Endpoints
 
 ### 1. Create Employee
 
 #### Endpoint
 
-POST /employee/payroll
+POST `/employee/payroll`
 
 #### Request Body
 - `name` (String): Employee name.
 - `designation` (String): Employee designation.
 - `projectName` (String): Project name associated with the employee.
-- `grossSalary` (double): Gross salary amount.
+- `grossSalary` (float): Gross salary amount.
 - `taxPercentage` (float): Tax percentage applicable to the gross salary.
 - `pensionPercentage` (float): Pension percentage applicable to the gross salary.
-- `additionalBenefits` (double): Additional benefits provided to the employee.
+- `additionalBenefits` (float): Additional benefits provided to the employee.
 
 #### Example Request
 ```json
 {
-  "name": "John Doe",
-  "designation": "Software Engineer",
-  "projectName": "Project X",
-  "grossSalary": 50000.0,
-  "taxPercentage": 10.0,
-  "pensionPercentage": 5.0,
-  "additionalBenefits": 1000.0
+   "name": "raju",
+   "designation": "Engineer",
+   "projectName": "NTTDATA",
+   "grossSalary": "100000.1234",
+   "taxPercentage": 20.1234,
+   "pensionPercentage": 10.1234,
+   "additionalBenefitAmount": 100.986
 }
 ```
+#### Example Response
+```json
+{
+    "id": 1,
+    "name": "raju",
+    "designation": "Engineer",
+    "projectName": "NTTDATA",
+    "grossSalary": 100000.12,
+    "taxPercentage": 20.1234,
+    "pensionPercentage": 10.1234,
+    "additionalBenefitAmount": 100.98
+}
+```
+
 ### 2. Get Employee
 #### Endpoint
-GET /employee/payroll
 
-Response Body
-name (String): Employee name.
-designation (String): Employee designation.
-projectName (String): Project name associated with the employee.
-grossSalary (double): Gross salary amount.
-taxPercentage (float): Tax percentage applicable to the gross salary.
-pensionPercentage (float): Pension percentage applicable to the gross salary.
-additionalBenefits (double): Additional benefits provided to the employee.
-netSalary (double): Net salary calculated as (gross salary - (gross salary * tax percentage) - (pension percentage * gross salary) + additional benefits).
+GET ```/employee/payroll```
+
+#### Response Body
+- `name` (String): Employee name.
+- `designation` (String): Employee designation.
+- `projectName` (String): Project name associated with the employee.
+- `grossSalary` (float): Gross salary amount.
+- `taxPercentage` (float): Tax percentage applicable to the gross salary.
+- `pensionPercentage` (float): Pension percentage applicable to the gross salary.
+- `additionalBenefits` (float): Additional benefits provided to the employee.
+- `netSalary` (float): Net salary calculated as (gross salary - (gross salary * tax percentage) - (pension percentage * gross salary) + additional benefits).
 
 Example Response
 ```json
 [
-{
-"name": "John Doe",
-"designation": "Software Engineer",
-"projectName": "Project X",
-"grossSalary": 50000.0,
-"taxPercentage": 10.0,
-"pensionPercentage": 5.0,
-"additionalBenefits": 1000.0,
-"netSalary": 42000.0
-}
+   {
+      "id": 1,
+      "name": "raju",
+      "designation": "Engineer",
+      "projectName": "NTTDATA",
+      "grossSalary": 100000.12,
+      "taxPercentage": 20.1234,
+      "pensionPercentage": 10.1234,
+      "additionalBenefitAmount": 100.98,
+      "netSalary": 69854.25
+   }
 ]
 ```
 
 ### 3. Health Check Endpoint
 Health Check Endpoint
-GET /manage/health
+
+GET ```/manage/health```
 
 ### 4. H2 Database UI
-Endpoint
-/h2-ui
+H2 Database Endpoint 
+
+GET ```/h2-ui```
 
 ### 5. OpenAPI
-Endpoint
-http://localhost:8080/swagger-ui/index.html
+Swagger Endpoint
+GET ```swagger-ui/index.html```
